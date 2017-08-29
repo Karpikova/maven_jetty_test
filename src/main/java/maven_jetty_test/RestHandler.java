@@ -1,0 +1,62 @@
+package maven_jetty_test;
+
+import org.springframework.stereotype.Component;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
+import java.net.URL;
+
+@Component
+public class RestHandler {
+
+    public String winAction() {
+        URL url = null;
+        HttpURLConnection connection = null;
+
+        try {
+            url = new URL("http://localhost:3333/home/hello");
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+            return "Wrong remote URL";
+        }
+
+        try {
+            connection = (HttpURLConnection) url.openConnection();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "Connection trouble";
+        }
+
+        String result = fetchRemoteGet(connection);
+        connection.disconnect();
+        return (result);
+    }
+
+    public String fetchRemoteGet(HttpURLConnection connection){
+        try {
+            connection.setRequestMethod("GET");
+            if (connection.getResponseCode() != 200) {
+                throw new RuntimeException("Failed : HTTP error code : "
+                        + connection.getResponseCode());
+            }
+            BufferedReader br = new BufferedReader(new InputStreamReader((connection.getInputStream())));
+            String output;
+            String out = "";
+            while ((output = br.readLine()) != null) {
+                out = out.concat(output);
+            }
+            return out;
+        } catch (ProtocolException e) {
+            e.printStackTrace();
+            return e.getMessage();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return e.getMessage();
+        }
+    }
+
+}
