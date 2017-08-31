@@ -13,12 +13,12 @@ import java.net.URL;
 @Component
 public class RestHandler {
 
-    public String winAction() {
+    public String getRandom(String url_string) {
         URL url = null;
         HttpURLConnection connection = null;
 
         try {
-            url = new URL("http://localhost:3333/home/hello");
+            url = new URL(url_string);
         } catch (MalformedURLException e) {
             e.printStackTrace();
             return "Wrong remote URL";
