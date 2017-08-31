@@ -6,15 +6,13 @@ import org.springframework.stereotype.Component;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-import java.beans.IntrospectionException;
-
 
 @Component
 @Path("home")
 public class Resource {
 
     @Autowired
-    Calculator calculator;
+    RestCalculatorImpl calculator;
 
     @Autowired
     ClassPathXmlApplicationContext context;
@@ -27,13 +25,8 @@ public class Resource {
     @Produces(MediaType.TEXT_PLAIN)
     public String calcOnline(@PathParam("arg1") String arg1) {
 
-        RestHandler restHandler1 = new RestHandler();
-        Calculator calculator1 = new Calculator();
-        String randomString = restHandler1.getRandom("http://localhost:3333/home/random");
-        int random = Integer.valueOf(randomString);
-
-        int resInt = calculator1.addition(Integer.valueOf(arg1), random);
+        RestCalculatorImpl calculator1 = new RestCalculatorImpl("http://localhost:3333/home/random");
+        int resInt = calculator1.plusRandom(Integer.valueOf(arg1));
         return "Result = " + resInt;
     }
-
 }

@@ -2,24 +2,30 @@ package maven_jetty_test;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.HashSet;
+import java.util.Set;
 
 import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
 
-@RunWith(MockitoJUnitRunner.class)
 public class IntegrationTest {
 
     @Test
     public void app(){
-        maven_jetty_test.Server server = new maven_jetty_test.Server(2222);
-        server.startServer();
+
+        int countToCheck = 0;
+        Thread thread = new Thread(new Runnable() {
+            public void run() {
+                maven_jetty_test.Server server = new maven_jetty_test.Server(2222);
+                server.startServer();
+            }
+        });
+        thread.start();
 
         RestHandler restHandler = new RestHandler();
 
@@ -39,6 +45,11 @@ public class IntegrationTest {
             e.printStackTrace();
             System.out.println("Connection trouble");
         }
-        restHandler.fetchRemoteGet(connection);
+
+        Set<Integer> randoms = new HashSet<Integer>();
+        for (int i = 0; i < countToCheck; i++) {
+            randoms.add(Integer.valueOf(restHandler.fetchRemoteGet(connection)));
+        }
+        assertEquals(countToCheck, randoms.size(), (countToCheck*0.1));
     }
 }
