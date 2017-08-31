@@ -1,6 +1,7 @@
 package maven_jetty_test;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Component;
 
 import javax.ws.rs.*;
@@ -13,6 +14,9 @@ public class Resource {
 
     @Autowired
     Calculator calculator;
+
+    @Autowired
+    ClassPathXmlApplicationContext context;
 
     @Autowired
     public RestHandler restHandler;
