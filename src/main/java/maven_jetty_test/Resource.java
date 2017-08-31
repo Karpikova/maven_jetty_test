@@ -15,9 +15,6 @@ public class Resource {
     RestCalculatorImpl calculator;
 
     @Autowired
-    ClassPathXmlApplicationContext context;
-
-    @Autowired
     public RestHandler restHandler;
 
     @GET
