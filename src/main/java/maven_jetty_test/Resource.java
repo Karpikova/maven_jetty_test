@@ -25,7 +25,7 @@ public class Resource {
     @Produces(MediaType.TEXT_PLAIN)
     public String calcOnline(@PathParam("arg1") String arg1) {
 
-        RestCalculatorImpl calculator1 = new RestCalculatorImpl("http://localhost:3333/home/random");
+        RestCalculatorImpl calculator1 = new RestCalculatorImpl("http://localhost:3333/home/random", new RestHandler());
         int resInt = calculator1.plusRandom(Integer.valueOf(arg1));
         return "Result = " + resInt;
     }

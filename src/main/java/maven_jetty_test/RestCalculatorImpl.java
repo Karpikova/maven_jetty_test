@@ -6,13 +6,14 @@ import org.springframework.stereotype.Component;
 public class RestCalculatorImpl implements RestCalculator{
 
     private String urlForRandom;
+    private RestHandler restHandler;
 
-    public RestCalculatorImpl(String urlForRandom) {
+    public RestCalculatorImpl(String urlForRandom, RestHandler restHandler) {
         this.urlForRandom = urlForRandom;
+        this.restHandler = restHandler;
     }
 
     public int plusRandom(int a) {
-        RestHandler restHandler = new RestHandler();
         String randomString = restHandler.getRandom(urlForRandom);
         int random = Integer.valueOf(randomString);
         return (a+random);
