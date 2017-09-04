@@ -13,17 +13,24 @@ import static org.mockito.Mockito.when;
 public class RestCalculatorUnitTest {
 
     @Mock
-    RestHandler restHandler;
+    RestHandler_HttpURLConnection httpURLConnection;
+
+    @Mock
+    RestHandler_RestTemplate restTemplate;
 
     @Test
     public void plusRandom() {
+        plusRandomByRest(httpURLConnection);
+        plusRandomByRest(restTemplate);
+    }
+
+    private void plusRandomByRest(Rest rest){
         ArgumentCaptor<String> url = ArgumentCaptor.forClass(String.class);
-        when(restHandler.getRandom(url.capture())).thenReturn("1").thenReturn("2").thenReturn("3");
-        RestCalculatorImpl restCalculator = new RestCalculatorImpl(url.capture(), restHandler);
+        when(rest.getRandom(url.capture())).thenReturn("1").thenReturn("2").thenReturn("3");
+        RestCalculatorImpl restCalculator = new RestCalculatorImpl(url.capture(), rest);
 
         Assert.assertEquals(8, restCalculator.plusRandom(7));
         Assert.assertEquals(10, restCalculator.plusRandom(8));
         Assert.assertEquals(12, restCalculator.plusRandom(9));
-
     }
 }

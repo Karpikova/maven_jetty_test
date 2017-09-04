@@ -1,8 +1,6 @@
 package maven_jetty_test;
 
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.runners.MockitoJUnitRunner;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
@@ -27,7 +25,7 @@ public class IntegrationTest {
         });
         thread.start();
 
-        RestHandler restHandler = new RestHandler();
+        RestHandler_HttpURLConnection restHandler = new RestHandler_HttpURLConnection();
 
         URL url = null;
         HttpURLConnection connection = null;

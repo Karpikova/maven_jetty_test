@@ -1,2 +1,8 @@
+maven_jetty_test\Rest.class
+maven_jetty_test\RestHandler_RestTemplate.class
 maven_jetty_test\Resource.class
+maven_jetty_test\RestHandler_HttpURLConnection.class
+maven_jetty_test\Server.class
+maven_jetty_test\RestCalculatorImpl.class
+maven_jetty_test\RestCalculator.class
 maven_jetty_test\App.class

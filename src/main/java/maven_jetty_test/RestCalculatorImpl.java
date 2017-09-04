@@ -6,9 +6,9 @@ import org.springframework.stereotype.Component;
 public class RestCalculatorImpl implements RestCalculator{
 
     private String urlForRandom;
-    private RestHandler restHandler;
+    private Rest restHandler;
 
-    public RestCalculatorImpl(String urlForRandom, RestHandler restHandler) {
+    public RestCalculatorImpl(String urlForRandom, Rest restHandler) {
         this.urlForRandom = urlForRandom;
         this.restHandler = restHandler;
     }
