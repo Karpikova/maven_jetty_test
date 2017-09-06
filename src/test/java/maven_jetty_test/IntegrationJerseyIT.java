@@ -4,6 +4,7 @@ package maven_jetty_test;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.test.JerseyTest;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import javax.ws.rs.core.Application;
@@ -12,7 +13,7 @@ import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
 
-public class IntegrationJerseyTest extends JerseyTest {
+public class IntegrationJerseyIT extends JerseyTest {
     @Override
     protected Application configure() {
         return new ResourceConfig(Resource.class);

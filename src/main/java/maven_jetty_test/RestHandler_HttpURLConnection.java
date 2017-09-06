@@ -1,7 +1,6 @@
 package maven_jetty_test;
 
 import org.springframework.stereotype.Component;
-import org.springframework.web.client.RestTemplate;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -12,7 +11,7 @@ import java.net.ProtocolException;
 import java.net.URL;
 
 @Component
-public class RestHandler_HttpURLConnection implements Rest{
+public class RestHandler_HttpURLConnection implements Rest {
 
     public String getRandom(String url_string) {
         URL url = null;
@@ -37,7 +36,7 @@ public class RestHandler_HttpURLConnection implements Rest{
         return (result);
     }
 
-    public String fetchRemoteGet(HttpURLConnection connection){
+    public String fetchRemoteGet(HttpURLConnection connection) {
         try {
             connection.setRequestMethod("GET");
             if (connection.getResponseCode() != 200) {

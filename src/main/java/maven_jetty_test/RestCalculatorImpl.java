@@ -3,7 +3,7 @@ package maven_jetty_test;
 import org.springframework.stereotype.Component;
 
 @Component
-public class RestCalculatorImpl implements RestCalculator{
+public class RestCalculatorImpl implements RestCalculator {
 
     private String urlForRandom;
     private Rest restHandler;
@@ -16,6 +16,6 @@ public class RestCalculatorImpl implements RestCalculator{
     public int plusRandom(int a) {
         String randomString = restHandler.getRandom(urlForRandom);
         int random = Integer.valueOf(randomString);
-        return (a+random);
+        return (a + random);
     }
 }

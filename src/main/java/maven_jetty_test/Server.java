@@ -27,16 +27,18 @@ public class Server {
         context.addServlet(servlet, "/*");
         try {
             server.start();
-            server.join();
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
             server.destroy();
         }
     }
 
     public void stopServer(){
-        server.destroy();
+        try {
+            server.stop();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }

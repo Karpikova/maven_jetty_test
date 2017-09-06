@@ -11,22 +11,22 @@ import java.util.Set;
 
 import static org.junit.Assert.*;
 
-public class IntegrationTest {
+public class IntegrationIT {
 
     @Test
     public void app(){
 
+        for (int i = 0; i < 10000; i++) {
+            test();
+        }
+    }
+
+    private void test() {
         int countToCheck = 0;
-        Thread thread = new Thread(new Runnable() {
-            public void run() {
-                maven_jetty_test.Server server = new maven_jetty_test.Server(2222);
-                server.startServer();
-            }
-        });
-        thread.start();
+        Server server = new Server(2222);
+        server.startServer();
 
         RestHandler_HttpURLConnection restHandler = new RestHandler_HttpURLConnection();
-
         URL url = null;
         HttpURLConnection connection = null;
 
@@ -49,5 +49,6 @@ public class IntegrationTest {
             randoms.add(Integer.valueOf(restHandler.fetchRemoteGet(connection)));
         }
         assertEquals(countToCheck, randoms.size(), (countToCheck*0.1));
+        server.stopServer();
     }
 }
